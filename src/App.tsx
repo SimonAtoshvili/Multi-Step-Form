@@ -1,4 +1,3 @@
-import React from 'react'
 import { Route, Routes, Link, useLocation } from 'react-router-dom'
 import Step1 from './pages/Step1'
 import Step2 from './pages/Step2'
