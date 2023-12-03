@@ -108,6 +108,7 @@ button {
   margin: 0 auto;
   background-color: #FFF;
   z-index: 2;
+  box-shadow: 25px 25px 40px rgba(0, 0, 0, 0.20);
 }
 
 h1 {
@@ -259,8 +260,13 @@ h3 {
 }
 
 .check {
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 .add_ons_price {
@@ -268,8 +274,140 @@ h3 {
   color: #483EFF;
 }
 
-.add_on input:checked + .add_on:before {
+.add_on input:checked+.add_on:before {
   background-color: #483EFF;
+}
+
+.checkbox_div {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg_div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #D6D9E6;
+  border-radius: 5px;
+}
+
+.check:scope {
+  background-color: red;
+}
+
+
+/* Step 4 */
+
+.sum_content {
+  width: 100%;
+  background-color: #F8F9FF;
+  border-radius: 8px;
+  min-height: 100px;
+  padding: 16px;
+}
+
+
+.above {
+  position: relative;
+}
+
+.main_price {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #022959;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#change {
+  width: fit-content;
+  border-bottom: 1px solid #9699AA;
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+hr {
+  height: 1px;
+  width: 100%;
+  background: #9699AA;
+  margin: 10px 0;
+}
+
+.sum_addons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sum_add {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total_sum_div {
+  padding: 0 16px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.add_ons_price2 {
+  color: #022959;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.total_sum {
+  color: #483EFF;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+#confirm {
+  background-color: #483EFF;
+}
+
+/* Thank You */
+
+.thank_div {
+  width: 100%;
+  margin: 45px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  color: #022959;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 24px 0 16px 0;
+}
+
+.thank_text {
+  color: #9699AA;
+  text-align: center;
+  font-size: 16px;
+  line-height: 25px;
 }
 
 @media (min-width: 768px) {}

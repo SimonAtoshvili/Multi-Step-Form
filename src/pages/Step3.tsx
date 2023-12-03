@@ -1,75 +1,100 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useMyContext } from '../Context'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import {useEffect} from 'react'
 
 export default function Step3() {
-    const { month } = useMyContext()
-    const { register, handleSubmit } = useForm()
+    const navigate = useNavigate();
+    const { month, setAddOns, addOns, myObj } = useMyContext()
+    const { register, handleSubmit, setValue, watch } = useForm<any>()
 
-    const onSubmit = (data: any) => {
-        console.log(data);
+    useEffect(() => {
+        if (myObj.name === '' && myObj.email === '' && myObj.phone === '') {
+            navigate('/')
+        }
+    }, [])
 
+    const arr = [
+        {
+            id: "online_service",
+            title: "Online service",
+            description: "Access to multiplayer games",
+            month: "+$1/mo",
+            year: "+$10/yr",
+            watch: watch("online_service")
+        },
+        {
+            id: "larger_storage",
+            title: "Larger storage",
+            description: "Extra 1TB of cloud save",
+            month: "+$2/mo",
+            year: "+$20/yr",
+            watch: watch("larger_storage")
+        },
+        {
+            id: "customizable_profile",
+            title: "Larger storage",
+            description: "Extra 1TB of cloud save",
+            month: "+$2/mo",
+            year: "+$20/yr",
+            watch: watch("customizable_profile")
+        }
+    ]
+
+    const onSubmit: SubmitHandler<any> = (data) => {
+        if (data) {
+            setAddOns(data);
+            navigate('/summary')
+        }
     }
+
+
     return (
         <>
             <div className='route'>
                 <h1>Pick add-ons</h1>
                 <p className='request'>Add-ons help enhance your gaming experience.</p>
                 <form className='add_ons_form'>
-                    <label className='add_ons_block' htmlFor='first'>
-                        <div className='add_on'>
-                            <input
-                                type="checkbox"
-                                className='check'
-                                id='first'
-                                {...register('online service')}
-                            />
-                            <div>
-                                <h3>Online service</h3>
-                                <p className="block_price">Access to multiplayer games</p>
+                    {arr.map((item: any, index: number) => (
+                        <label
+                            key={index}
+                            className='add_ons_block'
+                            htmlFor={item.id}
+                            style={item.watch === undefined && addOns[item.id] ? { borderColor: '#483EFF' } : item.watch ? { borderColor: '#483EFF' } : {}}
+                            onClick={() => {
+                                setValue(item.id, !addOns[item.id])
+                            }}
+                        >
+                            <div className='add_on'>
+                                <div className='checkbox_div'>
+                                    <input
+                                        type="checkbox"
+                                        className='check'
+                                        id={item.id}
+                                        defaultChecked={addOns[item.id]}
+                                        {...register(item.id)}
+                                    />
+                                    <div className='svg_div' style={item.watch === undefined && addOns[item.id] ? { backgroundColor: '#483EFF', borderColor: '#483EFF' } : item.watch ? { backgroundColor: '#483EFF', borderColor: '#483EFF' } : {}}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9" fill="none">
+                                            <path d="M1 4L4.43298 7.43298L10.866 1" stroke="white" strokeWidth="2" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3>{item.title}</h3>
+                                    <p className="block_price">{item.description}</p>
+                                </div>
                             </div>
-                        </div>
-                        <p className="add_ons_price">{`+$${month ? "1/mo" : "10/yr"}`}</p>
-                    </label>
-                    <label className='add_ons_block' htmlFor='second'>
-                        <div className='add_on'>
-                            <input
-                                type="checkbox"
-                                className='check'
-                                id='second'
-                                {...register('larger storage')}
-                            />
-                            <div>
-                                <h3>Larger storage</h3>
-                                <p className="block_price">Extra 1TB of cloud save</p>
-                            </div>
-                        </div>
-                        <p className="add_ons_price">{`+$${month ? "2/mo" : "20/yr"}`}</p>
-                    </label>
-                    <label className='add_ons_block' htmlFor='third'>
-                        <div className='add_on'>
-                            <input
-                                type="checkbox"
-                                className='check'
-                                id='third'
-                                {...register('customizable profile')}
-                            />
-                            <div>
-                                <h3>Customizable profile</h3>
-                                <p className="block_price">Custom theme on your profile</p>
-                            </div>
-                        </div>
-                        <p className="add_ons_price">{`+$${month ? "2/mo" : "20/yr"}`}</p>
-                    </label>
+                            <p className="add_ons_price">{month ? item.month : item.year}</p>
+                        </label>
+                    ))}
                 </form>
 
             </div>
             <footer>
                 <div className='step2_buttons'>
                     <Link to={'/plan'}><h4>Go Back</h4></Link>
-                    <Link to={'/summary'}>
-                        <button type='submit' onSubmit={handleSubmit(onSubmit)}>Next Step</button>
-                    </Link>
+                    <button type='submit' onClick={handleSubmit(onSubmit)}>Next Step</button>
                 </div>
             </footer>
         </>

@@ -1,46 +1,24 @@
 import { useMyContext } from '../Context'
-import { Link } from 'react-router-dom'
-
-interface PlanArray {
-    choice: string,
-    img: string,
-    month: number,
-    year: number
-}
-
-const planArray: PlanArray[] = [
-    {
-        choice: "Arcade",
-        img: "/assets/images/icon-arcade.svg",
-        month: 9,
-        year: 90,
-    },
-    {
-        choice: "Advanced",
-        img: "/assets/images/icon-advanced.svg",
-        month: 12,
-        year: 120,
-    },
-    {
-        choice: "Pro",
-        img: "/assets/images/icon-pro.svg",
-        month: 15,
-        year: 150,
-    }
-]
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 export default function Step2() {
+    let navigate = useNavigate()
+    const { month, setMonth, plan, setPlan, planArray, myObj } = useMyContext()
 
-    
+    useEffect(() => {
+        if (myObj.name === '' && myObj.email === '' && myObj.phone === '') {
+            navigate('/')
+        }
+    }, [])
 
-    const { month, setMonth, plan, setPlan } = useMyContext()
     return (
         <>
             <div className='route'>
                 <h1>Select your plan</h1>
                 <p className='request'>You have the option of monthly or yearly billing.</p>
                 <div className="blocks">
-                    {planArray.map((element: PlanArray, index: number) => (
+                    {planArray.map((element, index: number) => (
                         <div
                             key={index}
                             className='block'
@@ -78,7 +56,7 @@ export default function Step2() {
                     </div>
                     <p
                         style={!month ? { color: '#022959' } : {}}
-                        onClick={()=> {
+                        onClick={() => {
                             setMonth(false)
                         }}
                     >

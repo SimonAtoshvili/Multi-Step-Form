@@ -6,7 +6,17 @@ interface MyContext {
     setMonth: React.Dispatch<React.SetStateAction<boolean>>,
     setPlan: React.Dispatch<React.SetStateAction<string>>,
     myObj: MyObj,
-    setMyObj: React.Dispatch<React.SetStateAction<MyObj>>
+    setMyObj: React.Dispatch<React.SetStateAction<MyObj>>,
+    addOns: any,
+    setAddOns: React.Dispatch<React.SetStateAction<any>>,
+    planArray: PlanArray[]
+}
+
+interface PlanArray {
+    choice: string,
+    img: string,
+    month: number,
+    year: number
 }
 
 interface MyObj {
@@ -28,10 +38,38 @@ export const MyProvider = ({ children }: MyProvider) => {
         email: '',
         phone: ''
     })
+    const [addOns, setAddOns] = useState<any>({
+        online_service: false,
+        larger_storage: false,
+        customizable_profile: false
+    })
     const [month, setMonth] = useState<boolean>(true)
     const [plan, setPlan] = useState<string>('Arcade')
+
+    const planArray: PlanArray[] = [
+        {
+            choice: "Arcade",
+            img: "/assets/images/icon-arcade.svg",
+            month: 9,
+            year: 90,
+        },
+        {
+            choice: "Advanced",
+            img: "/assets/images/icon-advanced.svg",
+            month: 12,
+            year: 120,
+        },
+        {
+            choice: "Pro",
+            img: "/assets/images/icon-pro.svg",
+            month: 15,
+            year: 150,
+        }
+    ]
+
+
     return (
-        <MyContext.Provider value={{ month, plan, setMonth, setPlan, myObj, setMyObj }}>
+        <MyContext.Provider value={{ month, plan, setMonth, setPlan, myObj, setMyObj, addOns, setAddOns, planArray, }}>
             {children}
         </MyContext.Provider>
     );
