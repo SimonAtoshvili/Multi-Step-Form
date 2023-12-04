@@ -11,18 +11,18 @@ function App() {
   const { myObj } = useMyContext()
 
   return (
-    <div>
+    <div className='App'>
       <div className='header'>
         <nav>
           <ul>
-            <li>
+            <li className='nav_li'>
               <Link style={location.pathname == '/' ? { background: '#BEE2FD', borderColor: '#BEE2FD', color: '#022959' } : {}} className='sidebar_nums' to={location.pathname !== '/confirmed' ? '/' : location.pathname}>1</Link>
               <div className='nav_details'>
                 <p className="header_step">STEP 1</p>
                 <h2>YOUR INFO</h2>
               </div>
             </li>
-            <li>
+            <li className='nav_li'>
               <Link
                 style={location.pathname == '/plan' ? { background: '#BEE2FD', borderColor: '#BEE2FD', color: '#022959' } : {}}
                 className='sidebar_nums'
@@ -44,7 +44,7 @@ function App() {
                 <h2>SELECT PLAN</h2>
               </div>
             </li>
-            <li>
+            <li className='nav_li'>
               <Link
                 style={location.pathname == '/add-ons' ? { background: '#BEE2FD', borderColor: '#BEE2FD', color: '#022959' } : {}}
                 className='sidebar_nums'
@@ -66,7 +66,7 @@ function App() {
                 <h2>ADD-ONS</h2>
               </div>
             </li>
-            <li>
+            <li className='nav_li'>
               <Link
                 style={location.pathname == '/summary' ? { background: '#BEE2FD', borderColor: '#BEE2FD', color: '#022959' } : {}}
                 className='sidebar_nums'

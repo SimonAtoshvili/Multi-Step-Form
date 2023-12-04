@@ -6,7 +6,7 @@ import {useEffect} from 'react'
 export default function Step3() {
     const navigate = useNavigate();
     const { month, setAddOns, addOns, myObj } = useMyContext()
-    const { register, handleSubmit, setValue, watch } = useForm<any>()
+    const { register, handleSubmit, watch } = useForm<any>()
 
     useEffect(() => {
         if (myObj.name === '' && myObj.email === '' && myObj.phone === '') {
@@ -33,7 +33,7 @@ export default function Step3() {
         },
         {
             id: "customizable_profile",
-            title: "Larger storage",
+            title: "Customizable profile",
             description: "Extra 1TB of cloud save",
             month: "+$2/mo",
             year: "+$20/yr",
@@ -48,6 +48,8 @@ export default function Step3() {
         }
     }
 
+    console.log(watch("customizable_profile"));
+    
 
     return (
         <>
@@ -61,9 +63,6 @@ export default function Step3() {
                             className='add_ons_block'
                             htmlFor={item.id}
                             style={item.watch === undefined && addOns[item.id] ? { borderColor: '#483EFF' } : item.watch ? { borderColor: '#483EFF' } : {}}
-                            onClick={() => {
-                                setValue(item.id, !addOns[item.id])
-                            }}
                         >
                             <div className='add_on'>
                                 <div className='checkbox_div'>
@@ -80,7 +79,7 @@ export default function Step3() {
                                         </svg>
                                     </div>
                                 </div>
-                                <div>
+                                <div className='addons_text'>
                                     <h3>{item.title}</h3>
                                     <p className="block_price">{item.description}</p>
                                 </div>

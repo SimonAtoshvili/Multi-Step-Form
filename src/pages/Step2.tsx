@@ -28,7 +28,7 @@ export default function Step2() {
                             <img src={element.img} alt="arcade" />
                             <div className='block_text'>
                                 <h3>{element.choice}</h3>
-                                <p className="block_price">${month ? element.month : element.year}/mo</p>
+                                <p className="block_price">${month ? element.month + "/mo" : element.year + "/yr"}</p>
                                 <p className='free'>{!month ? '2 month free' : ''}</p>
                             </div>
                         </div>

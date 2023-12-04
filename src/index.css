@@ -148,7 +148,31 @@ input {
   border: 1px solid #D6D9E6;
   background: #FFF;
   padding-left: 16px;
+  color: #022959;
+  font-size: 14px;
+  font-weight: 500;
+}
 
+.input_div input:focus {
+  border-color: #483EFF;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.error {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.error_message {
+  color: #EE374A;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 /* Step 2 */
@@ -396,11 +420,12 @@ hr {
   align-items: center;
 }
 
-h2 {
+.thank_title {
   color: #022959;
   font-size: 24px;
   font-weight: 700;
   margin: 24px 0 16px 0;
+  text-transform: none;
 }
 
 .thank_text {
@@ -409,5 +434,3 @@ h2 {
   font-size: 16px;
   line-height: 25px;
 }
-
-@media (min-width: 768px) {}

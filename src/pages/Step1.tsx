@@ -36,39 +36,51 @@ export default function Step1() {
                 <form className="inputs">
 
                     <div className="input_div">
-                        <label htmlFor="name">Name</label>
+                        <div className="error">
+                            <label htmlFor="name">Name</label>
+                            <p className='error_message'>{errors.name?.message}</p>
+                        </div>
                         <input
                             id='name'
                             type="text"
+                            style={errors.name ? { borderColor: '#EE374A' } : {}}
                             defaultValue={myObj.name}
                             placeholder='e.g. Stephen King'
                             {...register('name')}
                         />
-                        <p style={{ fontSize: '10px', color: 'red' }}>{errors.name?.message}</p>
                     </div>
 
                     <div className="input_div">
-                        <label htmlFor="email">Email Address</label>
+                        <div className="error">
+                            <label htmlFor="email">Email Address</label>
+                            <p className='error_message'>{errors.email?.message}</p>
+                        </div>
                         <input
                             id='email'
                             type="email"
+                            style={errors.email ? { borderColor: '#EE374A' } : {}}
                             defaultValue={myObj.email}
                             placeholder='e.g. stephenking@lorem.com'
                             {...register('email')}
+                            onFocus={() => {
+
+                            }}
                         />
-                        <p style={{ fontSize: '10px', color: 'red' }}>{errors.email?.message}</p>
                     </div>
 
                     <div className="input_div">
-                        <label htmlFor="phone">Phone Number</label>
+                        <div className="error">
+                            <label htmlFor="phone">Phone Number</label>
+                            <p className='error_message'>{errors.phone?.message}</p>
+                        </div>
                         <input
                             id="phone"
                             type="number"
+                            style={errors.phone ? { borderColor: '#EE374A' } : {}}
                             defaultValue={myObj.phone}
                             placeholder='e.g. +1 234 567 890'
                             {...register('phone',)}
                         />
-                        <p style={{ fontSize: '10px', color: 'red' }}>{errors.phone?.message}</p>
                     </div>
 
                 </form>
